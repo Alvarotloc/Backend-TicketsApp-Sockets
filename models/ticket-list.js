@@ -25,7 +25,7 @@ class TicketList {
 
   asignarTicket(agente, escritorio) {
     if ([agente, escritorio].includes("")) return;
-    if (this.pendientes.length === 0) return;
+    if (this.pendientes.length === 0) return {error : 'No hay tickets en la cola'};
 
     const siguienteTicket = this.pendientes.shift();
 

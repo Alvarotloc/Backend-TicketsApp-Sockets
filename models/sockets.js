@@ -15,6 +15,14 @@ class Sockets {
             socket.on('generar-ticket',(data,callback) => {
                 const nuevoTicket = this.ticketList.crearTicket();
                 callback(nuevoTicket);
+            });
+
+            socket.on('asignar-tickets',({escritorio,nombre},callback) => {
+                const ticketAsignado = this.ticketList.asignarTicket(nombre,escritorio);
+                if(Object.keys(ticketAsignado)[0] !== 'error'){
+                    this.io.emit('ultimos-tickets',this.ticketList.ultimosOcho)
+                }
+                callback(ticketAsignado);
             })
         })
     }
